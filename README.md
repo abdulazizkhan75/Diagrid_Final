@@ -94,17 +94,21 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the detailed diagram and de
 
 # Instructions to follow
 
-Step 1.  diagrid login
+Step 1.  
+
+diagrid login
 
 Step 2.  
 
+```
 diagrid dev run `
   -f .\dapr.yaml `
   --project test-triage-take-home `
   --approve
+```
 
 Step 3
-
+```
 $body = @{
     task = "Triage run-1003 and tell me the most likely cause and next action."
 } | ConvertTo-Json
@@ -116,7 +120,7 @@ $result = Invoke-RestMethod `
     -Body $body
 
 $result | ConvertTo-Json -Depth 10
-
+```
 
 ## Demo data
 

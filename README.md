@@ -32,10 +32,6 @@ Catalyst adds:
 
 - durable agent/workflow execution so progress can survive process restarts
 - application identity and authenticated access to Dapr APIs
-- centralized topology and execution visibility
-- observable tool inputs/outputs for debugging and audit
-- pluggable Dapr components so providers can be changed without rewriting the agent's business logic
-- a path to policy-controlled access for production tools and data
 
 ## Architecture
 

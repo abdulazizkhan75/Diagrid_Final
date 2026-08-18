@@ -132,6 +132,3 @@ $result | ConvertTo-Json -Depth 10
 | `run-1004` | OAuth secret version drift | `configuration_failure` |
 
 These expected categories are not hard-coded into the agent. They make the demo evaluable and give the presenter a known baseline.
-## Demo runbook
-
-See [docs/DEMO.md](docs/DEMO.md) for a complete 20–30 minute presentation flow.

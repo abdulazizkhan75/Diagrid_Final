@@ -1,0 +1,78 @@
+{
+  "runs": {
+    "run-1001": {
+      "pipeline": "checkout-api-main",
+      "commit": "a17c92e",
+      "test": "test_create_order_returns_201",
+      "service": "checkout-api",
+      "environment": "staging",
+      "status": "failed",
+      "duration_seconds": 18.2,
+      "attempt": 1,
+      "logs": [
+        "POST /api/orders -> 500",
+        "sqlalchemy.exc.OperationalError: connection refused",
+        "db host: orders-db.staging.internal:5432",
+        "healthcheck orders-db: unhealthy"
+      ],
+      "expected": "HTTP 201 Created",
+      "actual": "HTTP 500 Internal Server Error"
+    },
+    "run-1002": {
+      "pipeline": "web-regression",
+      "commit": "b772cab",
+      "test": "test_checkout_button_visible",
+      "service": "storefront-web",
+      "environment": "staging",
+      "status": "failed",
+      "duration_seconds": 32.6,
+      "attempt": 2,
+      "logs": [
+        "TimeoutError: locator('[data-testid=checkout]').wait_for timeout 30000ms",
+        "network idle reached",
+        "screenshot shows checkout button rendered below cookie banner",
+        "retry #1 passed without code changes"
+      ],
+      "expected": "Checkout button visible and clickable",
+      "actual": "Element wait timed out"
+    },
+    "run-1003": {
+      "pipeline": "payments-contract-tests",
+      "commit": "e9097f1",
+      "test": "test_authorize_declined_card_schema",
+      "service": "payments-api",
+      "environment": "staging",
+      "status": "failed",
+      "duration_seconds": 7.4,
+      "attempt": 1,
+      "logs": [
+        "POST /v2/payments/authorize -> 200",
+        "schema mismatch at $.decline_reason",
+        "expected enum: [insufficient_funds, expired_card]",
+        "actual value: do_not_honor",
+        "provider changelog: new decline reason enabled"
+      ],
+      "expected": "Response conforms to consumer contract",
+      "actual": "Unknown enum value: do_not_honor"
+    },
+    "run-1004": {
+      "pipeline": "identity-e2e",
+      "commit": "ccd731a",
+      "test": "test_login_redirects_to_dashboard",
+      "service": "identity-web",
+      "environment": "staging",
+      "status": "failed",
+      "duration_seconds": 12.1,
+      "attempt": 1,
+      "logs": [
+        "POST /oauth/token -> 401",
+        "error=invalid_client",
+        "secret version referenced: oauth-client-v17",
+        "deployment changed 14 minutes before failure",
+        "vault contains current version oauth-client-v18"
+      ],
+      "expected": "Authenticated user redirected to /dashboard",
+      "actual": "Authentication failed with invalid_client"
+    }
+  }
+}

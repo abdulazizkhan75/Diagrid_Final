@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.demo-output/
+.env
+*.pyc
+resources\agent-llm-provider.yaml

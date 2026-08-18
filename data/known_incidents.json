@@ -1,0 +1,30 @@
+[
+  {
+    "id": "INC-221",
+    "title": "Staging orders database unavailable after maintenance",
+    "symptoms": ["connection refused", "database unhealthy", "orders-db"],
+    "category": "environment_failure",
+    "resolution": "Restore database service, verify healthcheck, rerun failed tests."
+  },
+  {
+    "id": "INC-198",
+    "title": "UI test obscured by cookie banner",
+    "symptoms": ["element timeout", "cookie banner", "retry passed"],
+    "category": "test_automation_defect",
+    "resolution": "Dismiss banner in fixture and use state-based wait before interaction."
+  },
+  {
+    "id": "INC-233",
+    "title": "Payment provider added new decline code",
+    "symptoms": ["schema mismatch", "do_not_honor", "contract"],
+    "category": "dependency_change",
+    "resolution": "Confirm provider contract, update allowed enum, add compatibility test."
+  },
+  {
+    "id": "INC-240",
+    "title": "OAuth client secret rotation mismatch",
+    "symptoms": ["invalid_client", "secret version", "vault"],
+    "category": "configuration_failure",
+    "resolution": "Update workload secret reference to current version and redeploy safely."
+  }
+]

@@ -1,0 +1,23 @@
+### Environment failure
+POST http://localhost:8001/agent/run
+Content-Type: application/json
+
+{"task":"Triage run-1001 and tell me the most likely cause and next action."}
+
+### Flaky/automation failure
+POST http://localhost:8001/agent/run
+Content-Type: application/json
+
+{"task":"Triage run-1002. Should this block the release?"}
+
+### Dependency contract change
+POST http://localhost:8001/agent/run
+Content-Type: application/json
+
+{"task":"Investigate run-1003 and recommend who should own the next action."}
+
+### Configuration failure
+POST http://localhost:8001/agent/run
+Content-Type: application/json
+
+{"task":"Triage run-1004 and identify the safest remediation."}

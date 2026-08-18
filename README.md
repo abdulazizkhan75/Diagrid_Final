@@ -92,60 +92,31 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the detailed diagram and de
 - `uv`
 - OpenAI API key
 
-## Run with Catalyst
+# Instructions to follow
 
-### 1. Configure the model
+Step 1.  diagrid login
 
-Edit `resources/agent-llm-provider.yaml` and replace:
+Step 2.  
 
-```yaml
-value: "YOUR_OPENAI_API_KEY"
-```
+diagrid dev run `
+  -f .\dapr.yaml `
+  --project test-triage-take-home `
+  --approve
 
-with a valid key. For a production implementation, do not commit a credential; inject it from a managed secret/component configuration.
+Step 3
 
-### 2. Install dependencies
+$body = @{
+    task = "Triage run-1003 and tell me the most likely cause and next action."
+} | ConvertTo-Json
 
-```bash
-uv sync
-```
+$result = Invoke-RestMethod `
+    -Method Post `
+    -Uri "http://localhost:8001/agent/run" `
+    -ContentType "application/json" `
+    -Body $body
 
-### 3. Authenticate
+$result | ConvertTo-Json -Depth 10
 
-```bash
-diagrid login
-diagrid whoami
-```
-
-### 4. Start the agent
-
-```bash
-diagrid dev run -f dapr.yaml --project test-triage-take-home --approve
-```
-
-Wait until the console prints:
-
-```text
-Test Triage Agent is running on http://localhost:8001
-```
-
-### 5. Trigger a triage run
-
-macOS/Linux:
-
-```bash
-curl -i -X POST http://localhost:8001/agent/run \
-  -H "Content-Type: application/json" \
-  -d '{"task":"Triage run-1001 and tell me the most likely cause and next action."}'
-```
-
-Windows PowerShell:
-
-```powershell
-Invoke-RestMethod -Method Post -Uri 'http://localhost:8001/agent/run' -ContentType 'application/json' -Body '{"task":"Triage run-1001 and tell me the most likely cause and next action."}'
-```
-
-Or use `test.http` with the VS Code REST Client extension.
 
 ## Demo data
 

@@ -1,8 +1,6 @@
 # Test Failure Triage Agent
 
-A durable AI agent for diagnosing failed automated tests and CI jobs using **Dapr Agents** and **Diagrid Catalyst**.
-
-The project is designed as a Solutions Engineer take-home: the demo is intentionally small enough to understand quickly, but it exposes production concerns such as durable execution, observability, workload identity, auditability, safe failure behavior, and pluggable integrations.
+An AI agent for diagnosing failed automated tests and CI jobs using **Dapr Agents** and **Diagrid Catalyst**.
 
 ## Business problem
 
@@ -11,10 +9,8 @@ A red CI job creates an investigation problem, not an answer. Teams lose enginee
 - a product defect
 - test automation/flakiness
 - an unhealthy environment
-- an upstream dependency or contract change
-- configuration or secret drift
 
-This agent gathers evidence, searches historical incidents, classifies the failure, recommends a next action, and saves an audit record.
+The agent gathers evidence, searches historical incidents, classifies the failure, recommends a next action, and saves an audit record.
 
 ## Agent scenario
 
@@ -25,7 +21,6 @@ The agent accepts a failed run ID such as `run-1001` and autonomously:
 3. searches a known-incident knowledge base
 4. classifies the likely root-cause category
 5. produces a confidence score and recommended action
-6. persists the final triage decision for auditability
 
 The demo uses deterministic local JSON fixtures so a live interview does not depend on GitHub/Jenkins/Datadog availability. Those files represent clean integration seams for production APIs or MCP tools.
 
